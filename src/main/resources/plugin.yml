@@ -1,0 +1,6 @@
+name: AnonymousMasks
+version: '${project.version}'
+main: dev.imfound.anonymousmasks.AnonymousMasks
+authors: [ ImFound ]
+description: AnonymousMasks
+website: ImFound.dev
