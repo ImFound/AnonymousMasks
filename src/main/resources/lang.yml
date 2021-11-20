@@ -11,7 +11,7 @@ Messages:
     - "&8* &f/am give <player> §8-§f Give the mask"
   help_console:
     - "&c&lANONYMOUS&f&lMASKS &8| &fCommands"
-      - ""
-      - "&8* &f/am give <player> §8-§f Give the mask"
+    - ""
+    - "&8* &f/am give <player> §8-§f Give the mask"
 Mask:
   head-error: "You already have something on your head!"
