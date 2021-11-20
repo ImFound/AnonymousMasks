@@ -7,15 +7,17 @@ import dev.imfound.anonymousmasks.events.EventManager;
 import dev.imfound.anonymousmasks.utils.DependsUtils;
 import dev.imfound.anonymousmasks.utils.Log;
 import dev.imfound.anonymousmasks.utils.Metrics;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AnonymousMasks extends JavaPlugin {
 
-
+    @Getter static AnonymousMasks instance;
 
     @Override
     public void onEnable() {
+        instance = this;
         Log.info("--[AnonymousMasks v5.0]--");
         long startTime = System.currentTimeMillis();
         Log.info("Loading configs...");
