@@ -28,7 +28,6 @@ public final class AnonymousMasks extends JavaPlugin {
         getLogger().info("Loading configs...");
         new Files();
         getLogger().info("Configs loaded!");
-        getLogger().info("Checking method..");
         if (DependsUtils.hasTab()) {
             getLogger().info("TAB found!");
         } else {
@@ -40,16 +39,13 @@ public final class AnonymousMasks extends JavaPlugin {
                 return;
             }
         }
-        getLogger().info("Methods checked!");
         getLogger().info("Registering commands...");
         new CommandManager(this);
         getLogger().info("Commands registered!");
         getLogger().info("Loading listeners...");
         new EventManager(this);
         getLogger().info("Listeners loaded!");
-        getLogger().info("Loading bStats...");
         Metrics m = new Metrics(this, 13312);
-        getLogger().info("bStats loaded!");
         long endTime = System.currentTimeMillis() - startTime;
         getLogger().info("Plugin loaded in " + endTime + "ms");
         getLogger().info("--[AnonymousMasks v5.0]--");
