@@ -1,6 +1,10 @@
 name: AnonymousMasks
-version: '${project.version}'
+version: '5.0'
 main: dev.imfound.anonymousmasks.AnonymousMasks
 authors: [ ImFound ]
 description: AnonymousMasks
 website: ImFound.dev
+commands:
+  anonymousmasks:
+    description: Comando AM5
+    aliases: [am, anonymousmask, am5]

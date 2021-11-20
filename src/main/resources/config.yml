@@ -1,0 +1,19 @@
+# -----[METHODS]-----
+# Use it for choose what method use for hiding nickname:
+# - Native (Using SpigotMC packets, default)
+# - TAB (Using TAB plugin API, recommended)
+# -----[METHODS]-----
+method: Native
+# -----[ITEMS]-----
+# Use it for choose and customize the items
+# -----[ITEMS]-----
+item:
+  displayname: "&8» &fAnonymousMasks"
+  material: SLIME_BALL
+  lore:
+    - "The first and the best plugin for masks"
+Chat:
+  chat-distance:
+    enabled: true
+    distance: 10
+  format: "&8&l»&7&l» &cAnonymous &8» &f%message%"
