@@ -33,20 +33,18 @@ public class PlayerInteract implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (e.getHand() != EquipmentSlot.HAND) return;
             Player p = e.getPlayer();
-            if (p.getInventory().getItemInMainHand() != null && p.getInventory().getItemInMainHand().getItemMeta() != null && p.getInventory().getItemInMainHand().getType() != null) {
-                if (MaskUtils.isMask(p.getInventory().getItemInMainHand())) {
-                    if (p.getInventory().getHelmet() != null) {
-                        p.sendMessage(Lang.PREFIX.getFormattedString() + Lang.HEAD_ERROR.getFormattedString());
-                        return;
-                    }
-                    p.getInventory().setHelmet(p.getInventory().getItemInMainHand());
-                    p.getInventory().getHelmet().setAmount(1);
-                    p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
-                    if (Config.METHOD.getString().equalsIgnoreCase("TAB")) {
-                        NametagUtils.hideNametagTab(p);
-                    } else {
-                        NametagUtils.hideNametagNative(p);
-                    }
+            if (MaskUtils.isMask(p.getInventory().getItemInMainHand())) {
+                if (p.getInventory().getHelmet() != null) {
+                    p.sendMessage(Lang.PREFIX.getFormattedString() + Lang.HEAD_ERROR.getFormattedString());
+                    return;
+                }
+                p.getInventory().setHelmet(p.getInventory().getItemInMainHand());
+                p.getInventory().getHelmet().setAmount(1);
+                p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
+                if (Config.METHOD.getString().equalsIgnoreCase("TAB")) {
+                    NametagUtils.hideNametagTab(p);
+                } else {
+                    NametagUtils.hideNametagNative(p);
                 }
             }
         }

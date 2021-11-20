@@ -1,5 +1,6 @@
 package dev.imfound.anonymousmasks.commands;
 
+import de.tr7zw.nbtapi.NBTItem;
 import dev.imfound.anonymousmasks.config.enums.Config;
 import dev.imfound.anonymousmasks.config.enums.Lang;
 import org.bukkit.Bukkit;
@@ -24,7 +25,7 @@ public class AnonymousMasksCommand implements CommandExecutor {
                     } else {
                         if(args[0].equalsIgnoreCase("get")) {
                             if(args.length == 1) {
-                                giveCreditCard(p);
+                                giveMask(p);
                                 p.sendMessage(Lang.PREFIX.getFormattedString() + Lang.MASK_GETTED.getFormattedString());
                             } else {
                                 for(String s : Lang.HELP.getStringList()) {
@@ -38,7 +39,7 @@ public class AnonymousMasksCommand implements CommandExecutor {
                                     return true;
                                 }
                                 Player toGive = Bukkit.getPlayer(args[1]);
-                                giveCreditCard(toGive);
+                                giveMask(toGive);
                                 p.sendMessage(Lang.PREFIX.getFormattedString() + Lang.MASK_GIVED.getFormattedString().replace("<player>", args[1]));
                             } else {
                                 for(String s : Lang.HELP.getStringList()) {
@@ -67,7 +68,7 @@ public class AnonymousMasksCommand implements CommandExecutor {
                                 return true;
                             }
                             Player toGive = Bukkit.getPlayer(args[1]);
-                            giveCreditCard(toGive);
+                            giveMask(toGive);
                             sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.MASK_GIVED.getFormattedString().replace("<player>", args[1]));
                         } else {
                             for(String s : Lang.HELP.getStringList()) {
@@ -85,12 +86,15 @@ public class AnonymousMasksCommand implements CommandExecutor {
         return false;
     }
 
-    private void giveCreditCard(Player p) {
+    private void giveMask(Player p) {
         ItemStack mask = new ItemStack(Config.ITEM_MATERIAL.getMaterial());
         ItemMeta mMeta = mask.getItemMeta();
         mMeta.setDisplayName(Config.ITEM_DISPLAYNAME.getFormattedString());
         mMeta.setLore(Config.ITEM_LORE.getStringList());
         mask.setItemMeta(mMeta);
+        NBTItem nbtItem = new NBTItem(mask);
+        nbtItem.setBoolean("mask", true);
+        nbtItem.applyNBT(mask);
         p.getInventory().addItem(mask);
     }
 

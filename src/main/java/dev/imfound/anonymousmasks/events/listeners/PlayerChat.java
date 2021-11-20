@@ -13,19 +13,17 @@ public class PlayerChat implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        if(p.getInventory().getHelmet() != null && p.getInventory().getHelmet().getItemMeta() != null && p.getInventory().getHelmet().getItemMeta().hasDisplayName()) {
-            if(!MaskUtils.isMask(p.getInventory().getHelmet())) return;
-            e.setCancelled(true);
-            if(Config.CHAT_DISTANCE_ENABLED.getBoolean()) {
-                for(Player ps : Bukkit.getOnlinePlayers()) {
-                    if(ps.getLocation().distance(p.getLocation()) <= Config.CHAT_DISTANCE_DISTANCE.getInt()) {
-                        ps.sendMessage(Config.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
-                    }
-                }
-            } else {
-                for(Player ps : Bukkit.getOnlinePlayers()) {
+        if (!MaskUtils.isMask(p.getInventory().getHelmet())) return;
+        e.setCancelled(true);
+        if (Config.CHAT_DISTANCE_ENABLED.getBoolean()) {
+            for (Player ps : Bukkit.getOnlinePlayers()) {
+                if (ps.getLocation().distance(p.getLocation()) <= Config.CHAT_DISTANCE_DISTANCE.getInt()) {
                     ps.sendMessage(Config.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
                 }
+            }
+        } else {
+            for (Player ps : Bukkit.getOnlinePlayers()) {
+                ps.sendMessage(Config.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
             }
         }
     }
