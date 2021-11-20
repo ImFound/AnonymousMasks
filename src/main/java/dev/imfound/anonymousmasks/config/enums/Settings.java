@@ -1,12 +1,13 @@
 package dev.imfound.anonymousmasks.config.enums;
 
 import dev.imfound.anonymousmasks.config.FileManager;
+import dev.imfound.anonymousmasks.config.Files;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 
 import java.util.List;
 
-public enum Config {
+public enum Settings {
 
     ITEM_DISPLAYNAME("item.displayname"),
     ITEM_MATERIAL("item.material"),
@@ -18,32 +19,32 @@ public enum Config {
 
     private final String path;
 
-    Config(String path) {
+    Settings(String path) {
         this.path = path;
     }
 
     public boolean getBoolean() {
-        return FileManager.getConfiguration().getBoolean(path);
+        return Files.SETTINGS.getConfiguration().getBoolean(path);
     }
 
     public String getFormattedString() {
-        return ChatColor.translateAlternateColorCodes('&', FileManager.getConfiguration().getString(path));
+        return ChatColor.translateAlternateColorCodes('&', Files.SETTINGS.getConfiguration().getString(path));
     }
 
     public Material getMaterial() {
-        return Material.getMaterial(FileManager.getConfiguration().getString(path));
+        return Material.getMaterial(Files.SETTINGS.getConfiguration().getString(path));
     }
 
     public String getString() {
-        return FileManager.getConfiguration().getString(path);
+        return Files.SETTINGS.getConfiguration().getString(path);
     }
 
     public int getInt() {
-        return FileManager.getConfiguration().getInt(path);
+        return Files.SETTINGS.getConfiguration().getInt(path);
     }
 
     public List<String> getStringList() {
-        return FileManager.getConfiguration().getStringList(path);
+        return Files.SETTINGS.getConfiguration().getStringList(path);
     }
 
     public static String getFormattedString(String string) {

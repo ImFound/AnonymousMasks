@@ -1,6 +1,7 @@
 package dev.imfound.anonymousmasks.config;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,35 +14,34 @@ import java.util.HashMap;
 
 public class FileManager {
 
-    private File dataFolder;
-    private JavaPlugin plugin;
-    @Getter static FileConfiguration langConfiguration;
-    @Getter static FileConfiguration configuration;
+    private final String fileName;
+    private String customFolder;
+    private final JavaPlugin plugin;
+    @Getter public FileConfiguration configuration;
 
-    public FileManager(File dataFolder, JavaPlugin plugin) {
-        this.dataFolder = dataFolder;
+    public FileManager(String fileName, JavaPlugin plugin) {
+        this.fileName = fileName;
         this.plugin = plugin;
-        createConfigs();
+        init();
     }
 
+    public FileManager(String fileName, String customFolder, JavaPlugin plugin) {
+        this.fileName = fileName;
+        this.customFolder = customFolder;
+        this.plugin = plugin;
+        init();
+    }
 
-    private void createConfigs() {
-        File langFile = new File(dataFolder, "lang.yml");
-        if(!langFile.exists()) {
-            langFile.getParentFile().mkdirs();
-            plugin.saveResource("lang.yml", false);
+    private void init() {
+        File file = new File(plugin.getDataFolder() + (customFolder != null ? "/" + customFolder : ""),  fileName + ".yml");
+        if(!file.exists()) {
+            file.getParentFile().mkdirs();
+            plugin.saveResource(fileName + ".yml", false);
         }
-        FileConfiguration langConfig = new YamlConfiguration();
-        File configFile = new File(dataFolder, "config.yml");
-        if(!configFile.exists()) {
-            configFile.getParentFile().mkdirs();
-            plugin.saveResource("config.yml", false);
-        }
+
         FileConfiguration yamlConfiguration = new YamlConfiguration();
         try{
-            yamlConfiguration.load(configFile);
-            langConfig.load(langFile);
-            langConfiguration = langConfig;
+            yamlConfiguration.load(file);
             configuration = yamlConfiguration;
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
 package dev.imfound.anonymousmasks.events.listeners;
 
-import dev.imfound.anonymousmasks.config.enums.Config;
+import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.utils.MaskUtils;
 import dev.imfound.anonymousmasks.utils.NametagUtils;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ public class InventoryClick implements Listener {
     public void onClick(InventoryClickEvent e) {
         final Player p = (Player)e.getWhoClicked();
         if (e.getCurrentItem() != null && MaskUtils.isMask(e.getCurrentItem()) && e.getSlotType() == InventoryType.SlotType.ARMOR) {
-            if(Config.METHOD.getString().equalsIgnoreCase("TAB")) {
+            if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
                 NametagUtils.showNametagTab(p);
             } else {
                 NametagUtils.showNametagNative(p);

@@ -1,11 +1,10 @@
 package dev.imfound.anonymousmasks;
 
 import dev.imfound.anonymousmasks.commands.CommandManager;
-import dev.imfound.anonymousmasks.config.FileManager;
-import dev.imfound.anonymousmasks.config.enums.Config;
+import dev.imfound.anonymousmasks.config.Files;
+import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.events.EventManager;
 import dev.imfound.anonymousmasks.utils.DependsUtils;
-import dev.imfound.anonymousmasks.utils.Log;
 import dev.imfound.anonymousmasks.utils.Metrics;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -13,39 +12,47 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class AnonymousMasks extends JavaPlugin {
 
-    @Getter static AnonymousMasks instance;
+    @Getter
+    static AnonymousMasks instance;
 
     @Override
     public void onEnable() {
         instance = this;
-        Log.info("--[AnonymousMasks v5.0]--");
+       getLogger().info("\n  __   __ _   __   __ _  _  _  _  _   __   _  _  ____  _  _   __   ____  __ _  ____ \n" +
+               " / _\\ (  ( \\ /  \\ (  ( \\( \\/ )( \\/ ) /  \\ / )( \\/ ___)( \\/ ) / _\\ / ___)(  / )/ ___)\n" +
+               "/    \\/    /(  O )/    / )  / / \\/ \\(  O )) \\/ (\\___ \\/ \\/ \\/    \\\\___ \\ )  ( \\___ \\\n" +
+               "\\_/\\_/\\_)__) \\__/ \\_)__)(__/  \\_)(_/ \\__/ \\____/(____/\\_)(_/\\_/\\_/(____/(__\\_)(____/\n");
+
+        getLogger().info("--[AnonymousMasks v5.0]--");
         long startTime = System.currentTimeMillis();
-        Log.info("Loading configs...");
-        new FileManager(getDataFolder(), this);
-        Log.info("Configs loaded!");
-        Log.info("Checking method..");
-        if(DependsUtils.hasTab()) {
-            Log.info("TAB found!");
+        getLogger().info("Loading configs...");
+        new Files();
+        getLogger().info("Configs loaded!");
+        getLogger().info("Checking method..");
+        if (DependsUtils.hasTab()) {
+            getLogger().info("TAB found!");
         } else {
-          if(Config.METHOD.getString().equalsIgnoreCase("TAB")) {
-                Log.error("TAB NOT FOUND! ABORTING START!");
+            if (Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
+                for(int i = 10; i < 10; ++i) {
+                    getLogger().severe("TAB NOT FOUND! ABORTING START!");
+                }
                 Bukkit.getPluginManager().getPlugin("AnonymousMasks").onDisable();
                 return;
             }
         }
-        Log.info("Methods checked!");
-        Log.info("Registering commands...");
+        getLogger().info("Methods checked!");
+        getLogger().info("Registering commands...");
         new CommandManager(this);
-        Log.info("Commands registered!");
-        Log.info("Loading listeners...");
+        getLogger().info("Commands registered!");
+        getLogger().info("Loading listeners...");
         new EventManager(this);
-        Log.info("Listeners loaded!");
-        Log.info("Loading bStats...");
-        new Metrics(this, 13312);
-        Log.info("bStats loaded!");
+        getLogger().info("Listeners loaded!");
+        getLogger().info("Loading bStats...");
+        Metrics m = new Metrics(this, 13312);
+        getLogger().info("bStats loaded!");
         long endTime = System.currentTimeMillis() - startTime;
-        Log.info("Plugin loaded in " + endTime + "ms");
-        Log.info("--[AnonymousMasks v5.0]--");
+        getLogger().info("Plugin loaded in " + endTime + "ms");
+        getLogger().info("--[AnonymousMasks v5.0]--");
     }
 
     @Override

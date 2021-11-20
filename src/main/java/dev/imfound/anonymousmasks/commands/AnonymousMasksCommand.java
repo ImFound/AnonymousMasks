@@ -3,6 +3,7 @@ package dev.imfound.anonymousmasks.commands;
 import dev.imfound.anonymousmasks.AnonymousMasks;
 import dev.imfound.anonymousmasks.commands.subcommands.GetSubcmd;
 import dev.imfound.anonymousmasks.commands.subcommands.GiveSubcmd;
+import dev.imfound.anonymousmasks.commands.subcommands.ReloadSubcmd;
 import dev.imfound.anonymousmasks.config.enums.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,6 +26,7 @@ public class AnonymousMasksCommand implements CommandExecutor {
         this.plugin = plugin;
         this.registerCommand("get", new GetSubcmd());
         this.registerCommand("give", new GiveSubcmd());
+        this.registerCommand("reload", new ReloadSubcmd());
     }
 
     private void registerCommand(final String cmd, final SubCommand subCommand) {

@@ -1,6 +1,7 @@
 package dev.imfound.anonymousmasks.config.enums;
 
 import dev.imfound.anonymousmasks.config.FileManager;
+import dev.imfound.anonymousmasks.config.Files;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.List;
@@ -14,7 +15,8 @@ public enum Lang {
    MASK_GETTED(".Messages.mask-getted"),
    MASK_GIVED(".Messages.mask-gived"),
    MASK_NOT_ONLINE(".Messages.not-online"),
-   HEAD_ERROR(".Mask.head-error");
+   HEAD_ERROR(".Mask.head-error"),
+   RELOADED(".Messages.reload");
 
     private final String path;
 
@@ -23,23 +25,23 @@ public enum Lang {
     }
 
     public boolean getBoolean() {
-        return FileManager.getLangConfiguration().getBoolean(path);
+        return Files.LANG.getConfiguration().getBoolean(path);
     }
 
     public String getFormattedString() {
-        return ChatColor.translateAlternateColorCodes('&', FileManager.getLangConfiguration().getString(path));
+        return ChatColor.translateAlternateColorCodes('&', Files.LANG.getConfiguration().getString(path));
     }
 
     public String getString() {
-        return FileManager.getLangConfiguration().getString(path);
+        return Files.LANG.getConfiguration().getString(path);
     }
 
     public int getInt() {
-        return FileManager.getLangConfiguration().getInt(path);
+        return Files.LANG.getConfiguration().getInt(path);
     }
 
     public List<String> getStringList() {
-        return FileManager.getLangConfiguration().getStringList(path);
+        return Files.LANG.getConfiguration().getStringList(path);
     }
 
     public static String getFormattedString(String string) {

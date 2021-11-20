@@ -1,9 +1,6 @@
 package dev.imfound.anonymousmasks.events;
 
-import dev.imfound.anonymousmasks.events.listeners.InventoryClick;
-import dev.imfound.anonymousmasks.events.listeners.PlayerChat;
-import dev.imfound.anonymousmasks.events.listeners.PlayerInteract;
-import dev.imfound.anonymousmasks.events.listeners.PlayerJoin;
+import dev.imfound.anonymousmasks.events.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EventManager {
@@ -16,6 +13,7 @@ public class EventManager {
         plugin.getServer().getPluginManager().registerEvents(new PlayerInteract(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoin(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryClick(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerQuit(), plugin);
     }
 
 }

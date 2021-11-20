@@ -1,6 +1,6 @@
 package dev.imfound.anonymousmasks.events.listeners;
 
-import dev.imfound.anonymousmasks.config.enums.Config;
+import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.utils.MaskUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,15 +15,15 @@ public class PlayerChat implements Listener {
         Player p = e.getPlayer();
         if (!MaskUtils.isMask(p.getInventory().getHelmet())) return;
         e.setCancelled(true);
-        if (Config.CHAT_DISTANCE_ENABLED.getBoolean()) {
+        if (Settings.CHAT_DISTANCE_ENABLED.getBoolean()) {
             for (Player ps : Bukkit.getOnlinePlayers()) {
-                if (ps.getLocation().distance(p.getLocation()) <= Config.CHAT_DISTANCE_DISTANCE.getInt()) {
-                    ps.sendMessage(Config.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
+                if (ps.getLocation().distance(p.getLocation()) <= Settings.CHAT_DISTANCE_DISTANCE.getInt()) {
+                    ps.sendMessage(Settings.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
                 }
             }
         } else {
             for (Player ps : Bukkit.getOnlinePlayers()) {
-                ps.sendMessage(Config.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
+                ps.sendMessage(Settings.FORMAT.getFormattedString().replace("%message%", e.getMessage()));
             }
         }
     }
