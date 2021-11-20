@@ -23,10 +23,10 @@ public final class AnonymousMasks extends JavaPlugin {
         Log.info("Configs loaded!");
         Log.info("Checking method..");
         if(DependsUtils.hasTab()) {
-            Log.info("TAB founded!");
+            Log.info("TAB found!");
         } else {
           if(Config.METHOD.getString().equalsIgnoreCase("TAB")) {
-                Log.error("TAB NOT FOUNDED! ABORTING START!");
+                Log.error("TAB NOT FOUND! ABORTING START!");
                 Bukkit.getPluginManager().getPlugin("AnonymousMasks").onDisable();
                 return;
             }
