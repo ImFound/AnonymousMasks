@@ -29,6 +29,7 @@ public final class AnonymousMasks extends JavaPlugin {
         new Files();
         getLogger().info("Configs loaded!");
         getLogger().info("Checking method..");
+        reloadConfig();
         if (DependsUtils.hasTab()) {
             getLogger().info("TAB found!");
         } else {

@@ -1,6 +1,7 @@
 package dev.imfound.anonymousmasks.config;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -17,7 +18,8 @@ public class FileManager {
     private final String fileName;
     private String customFolder;
     private final JavaPlugin plugin;
-    @Getter public FileConfiguration configuration;
+    @Getter @Setter
+    public FileConfiguration configuration;
 
     public FileManager(String fileName, JavaPlugin plugin) {
         this.fileName = fileName;

@@ -8,13 +8,12 @@ import org.bukkit.entity.Player;
 
 public class ReloadSubcmd extends SubCommand {
 
-    // TODO METHOD FOR RELOAD
-
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (sender.hasPermission("anonymousmasks.commands.reload")) {
             if (args.length == 1) {
-                new Files();
+                Files.reload("lang", Files.LANG);
+                Files.reload("settings", Files.SETTINGS);
                 sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.RELOADED.getFormattedString());
             } else {
                 sendHelpMessage(sender);
