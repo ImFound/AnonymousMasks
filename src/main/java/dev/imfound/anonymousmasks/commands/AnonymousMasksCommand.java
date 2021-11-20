@@ -1,15 +1,13 @@
 package dev.imfound.anonymousmasks.commands;
 
-import de.tr7zw.nbtapi.NBTItem;
-import dev.imfound.anonymousmasks.config.enums.Config;
 import dev.imfound.anonymousmasks.config.enums.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+
+import static dev.imfound.anonymousmasks.utils.MaskUtils.giveMask;
 
 public class AnonymousMasksCommand implements CommandExecutor {
     @Override
@@ -86,16 +84,5 @@ public class AnonymousMasksCommand implements CommandExecutor {
         return false;
     }
 
-    private void giveMask(Player p) {
-        ItemStack mask = new ItemStack(Config.ITEM_MATERIAL.getMaterial());
-        ItemMeta mMeta = mask.getItemMeta();
-        mMeta.setDisplayName(Config.ITEM_DISPLAYNAME.getFormattedString());
-        mMeta.setLore(Config.ITEM_LORE.getStringList());
-        mask.setItemMeta(mMeta);
-        NBTItem nbtItem = new NBTItem(mask);
-        nbtItem.setBoolean("mask", true);
-        nbtItem.applyNBT(mask);
-        p.getInventory().addItem(mask);
-    }
 
 }

@@ -3,7 +3,9 @@ package dev.imfound.anonymousmasks.utils;
 import de.tr7zw.nbtapi.NBTItem;
 import dev.imfound.anonymousmasks.config.enums.Config;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class MaskUtils {
 
@@ -16,5 +18,18 @@ public class MaskUtils {
         }
         return false;
     }
+
+    public static void giveMask(Player p) {
+        ItemStack mask = new ItemStack(Config.ITEM_MATERIAL.getMaterial());
+        ItemMeta mMeta = mask.getItemMeta();
+        mMeta.setDisplayName(Config.ITEM_DISPLAYNAME.getFormattedString());
+        mMeta.setLore(Config.ITEM_LORE.getStringList());
+        mask.setItemMeta(mMeta);
+        NBTItem nbtItem = new NBTItem(mask);
+        nbtItem.setBoolean("mask", true);
+        nbtItem.applyNBT(mask);
+        p.getInventory().addItem(mask);
+    }
+
 
 }
