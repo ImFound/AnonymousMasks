@@ -11,7 +11,7 @@ Messages:
     - "&8* &f/am get §8-§f Get the mask"
     - "&8* &f/am give <player> §8-§f Give the mask"
     - "§8* &f/am reload &8- &fReload all configs"
-    help_console:
+  help_console:
     - "&c&lANONYMOUS&f&lMASKS &8| &fCommands"
     - ""
     - "&8* &f/am give <player> §8-§f Give the mask"
