@@ -2,7 +2,7 @@ prefix: "&c&lANONYMOUS&f&lMASKS &8» &f"
 Messages:
   no-perms: "&4You don't have the permission!"
   mask-getted: "Mask gived"
-  mask-gived: "Mask gived to <player>"
+  mask-gived: "Mask gived to &c<player>"
   not-online: "&c<player>&f is not online!"
   reload: "&aPlugin reloaded!"
   help:

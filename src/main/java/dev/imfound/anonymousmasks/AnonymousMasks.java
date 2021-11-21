@@ -1,12 +1,14 @@
 package dev.imfound.anonymousmasks;
 
 import dev.imfound.anonymousmasks.commands.CommandManager;
+import dev.imfound.anonymousmasks.config.FileManager;
 import dev.imfound.anonymousmasks.config.Files;
 import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.events.EventManager;
 import dev.imfound.anonymousmasks.utils.DependsUtils;
 import dev.imfound.anonymousmasks.utils.Metrics;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,6 +17,7 @@ public final class AnonymousMasks extends JavaPlugin {
     @Getter
     static AnonymousMasks instance;
 
+    @SneakyThrows
     @Override
     public void onEnable() {
         instance = this;
@@ -29,6 +32,12 @@ public final class AnonymousMasks extends JavaPlugin {
         new Files();
         getLogger().info("Configs loaded!");
         if (DependsUtils.hasTab()) {
+            if(Settings.METHOD.getString().equalsIgnoreCase("Native")) {
+                getLogger().warning("I found that you have TAB but in the settings you have put the method in Native, i'm setting the method to TAB");
+                getLogger().warning("TAB manage the scoreboards, so I can't manage scoreboards");
+                Files.SETTINGS.getConfiguration().set(".method", "TAB");
+                Files.SETTINGS.getConfiguration().save(Files.SETTINGS.getFile());
+            }
             getLogger().info("TAB found!");
         } else {
             if (Settings.METHOD.getString().equalsIgnoreCase("TAB")) {

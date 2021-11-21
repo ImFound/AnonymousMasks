@@ -18,6 +18,8 @@ public class ReloadSubcmd extends SubCommand {
             } else {
                 sendHelpMessage(sender);
             }
+        } else {
+            sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.NO_PERMS.getFormattedString());
         }
     }
 

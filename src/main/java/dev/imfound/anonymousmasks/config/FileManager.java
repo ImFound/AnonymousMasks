@@ -20,6 +20,7 @@ public class FileManager {
     private final JavaPlugin plugin;
     @Getter @Setter
     public FileConfiguration configuration;
+    @Getter File file;
 
     public FileManager(String fileName, JavaPlugin plugin) {
         this.fileName = fileName;
@@ -36,6 +37,7 @@ public class FileManager {
 
     private void init() {
         File file = new File(plugin.getDataFolder() + (customFolder != null ? "/" + customFolder : ""),  fileName + ".yml");
+        this.file = file;
         if(!file.exists()) {
             file.getParentFile().mkdirs();
             plugin.saveResource(fileName + ".yml", false);
