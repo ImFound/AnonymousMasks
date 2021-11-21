@@ -1,5 +1,8 @@
 package dev.imfound.anonymousmasks.events.listeners;
 
+import dev.imfound.anonymousmasks.config.enums.Settings;
+import dev.imfound.anonymousmasks.utils.MaskUtils;
+import dev.imfound.anonymousmasks.utils.NametagUtils;
 import dev.imfound.anonymousmasks.utils.UpdateChecker;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -22,6 +25,13 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+        if(MaskUtils.isMask(p.getInventory().getHelmet())) {
+            if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
+                NametagUtils.hideNametagTab(p);
+            } else {
+                NametagUtils.hideNametagNative(p);
+            }
+        }
         if(p.hasPermission("anonymousmasks.update")) {
             new UpdateChecker(plugin, 89836).getVersion(version -> {
                 if (!plugin.getDescription().getVersion().equals(version)) {

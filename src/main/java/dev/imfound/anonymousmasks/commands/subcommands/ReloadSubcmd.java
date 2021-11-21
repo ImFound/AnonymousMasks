@@ -11,13 +11,9 @@ public class ReloadSubcmd extends SubCommand {
     @Override
     public void onCommand(CommandSender sender, String[] args) {
         if (sender.hasPermission("anonymousmasks.commands.reload")) {
-            if (args.length == 1) {
-                Files.reload("lang", Files.LANG);
-                Files.reload("settings", Files.SETTINGS);
-                sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.RELOADED.getFormattedString());
-            } else {
-                sendHelpMessage(sender);
-            }
+            Files.reload("lang", Files.LANG);
+            Files.reload("settings", Files.SETTINGS);
+            sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.RELOADED.getFormattedString());
         } else {
             sender.sendMessage(Lang.PREFIX.getFormattedString() + Lang.NO_PERMS.getFormattedString());
         }
