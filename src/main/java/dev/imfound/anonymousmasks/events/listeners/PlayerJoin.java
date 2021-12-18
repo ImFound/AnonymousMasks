@@ -1,5 +1,6 @@
 package dev.imfound.anonymousmasks.events.listeners;
 
+import dev.imfound.anonymousmasks.AnonymousMasks;
 import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.utils.MaskUtils;
 import dev.imfound.anonymousmasks.utils.NametagUtils;
@@ -8,6 +9,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,11 +28,13 @@ public class PlayerJoin implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if(MaskUtils.isMask(p.getInventory().getHelmet())) {
-            if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
-                NametagUtils.hideNametagTab(p);
-            } else {
-                NametagUtils.hideNametagNative(p);
-            }
+            Bukkit.getScheduler().runTaskLater(AnonymousMasks.getInstance(), () -> {
+                if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
+                    NametagUtils.hideNametagTab(p);
+                } else {
+                    NametagUtils.hideNametagNative(p);
+                }
+            }, 3L);
         }
         if(p.hasPermission("anonymousmasks.update")) {
             new UpdateChecker(plugin, 89836).getVersion(version -> {

@@ -16,7 +16,8 @@ public enum Lang {
    MASK_GIVED(".Messages.mask-gived"),
    MASK_NOT_ONLINE(".Messages.not-online"),
    HEAD_ERROR(".Mask.head-error"),
-   RELOADED(".Messages.reload");
+   RELOADED(".Messages.reload"),
+    RIGHT_CLICK(".Messages.right-click");
 
     private final String path;
 

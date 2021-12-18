@@ -5,6 +5,7 @@ Messages:
   mask-gived: "Mask gived to &c<player>"
   not-online: "&c<player>&f is not online!"
   reload: "&aPlugin reloaded!"
+  right-click: "&cThe player that you have right-clicked is <player>"
   help:
     - "&c&lANONYMOUS&f&lMASKS &8| &fCommands"
     - ""

@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
@@ -36,4 +37,17 @@ public class PlayerInteract implements Listener {
         }
     }
 
+
+    @EventHandler
+    public void onRightClick(PlayerInteractAtEntityEvent e) {
+        if(e.getRightClicked() instanceof Player) {
+            Player entity = (Player) e.getRightClicked();
+            Player player = e.getPlayer();
+            if(player.hasPermission("anonymousmasks.utils.name")) {
+                if(entity.getInventory().getHelmet() != null && entity.getInventory().getHelmet().getItemMeta() != null && entity.getInventory().getHelmet().getItemMeta().getDisplayName() != null && entity.getInventory().getHelmet().getItemMeta().getDisplayName().equals(Settings.ITEM_DISPLAYNAME.getFormattedString())) {
+                    player.sendMessage(Lang.PREFIX.getFormattedString() + Lang.RIGHT_CLICK.getFormattedString().replace("<player>", entity.getName()));
+                }
+            }
+        }
+    }
 }
