@@ -2,10 +2,12 @@
 # Use it for choose what method use for hiding nickname:
 # - Native (Using SpigotMC packets, default)
 # - TAB (Using TAB plugin API, recommended)
+# - ArmorStand (Places an armor stand as a player's passenger, thus hiding the nametag)
 # -----[METHODS]-----
 method: Native
 # -----[ITEMS]-----
 # Use it for choose and customize the items
+# SULPHUR for gunpowder <1.12.2
 # -----[ITEMS]-----
 item:
   displayname: "&8» &fAnonymousMasks"

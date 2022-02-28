@@ -9,6 +9,7 @@ import dev.imfound.anonymousmasks.utils.DependsUtils;
 import dev.imfound.anonymousmasks.utils.Metrics;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import me.neznamy.tab.api.TabAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,18 +22,23 @@ public final class AnonymousMasks extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-       getLogger().info("\n  __   __ _   __   __ _  _  _  _  _   __   _  _  ____  _  _   __   ____  __ _  ____ \n" +
-               " / _\\ (  ( \\ /  \\ (  ( \\( \\/ )( \\/ ) /  \\ / )( \\/ ___)( \\/ ) / _\\ / ___)(  / )/ ___)\n" +
-               "/    \\/    /(  O )/    / )  / / \\/ \\(  O )) \\/ (\\___ \\/ \\/ \\/    \\\\___ \\ )  ( \\___ \\\n" +
-               "\\_/\\_/\\_)__) \\__/ \\_)__)(__/  \\_)(_/ \\__/ \\____/(____/\\_)(_/\\_/\\_/(____/(__\\_)(____/\n");
-
+        getLogger().info("\n  __   __ _   __   __ _  _  _  _  _   __   _  _  ____  _  _   __   ____  __ _  ____ \n" +
+                " / _\\ (  ( \\ /  \\ (  ( \\( \\/ )( \\/ ) /  \\ / )( \\/ ___)( \\/ ) / _\\ / ___)(  / )/ ___)\n" +
+                "/    \\/    /(  O )/    / )  / / \\/ \\(  O )) \\/ (\\___ \\/ \\/ \\/    \\\\___ \\ )  ( \\___ \\\n" +
+                "\\_/\\_/\\_)__) \\__/ \\_)__)(__/  \\_)(_/ \\__/ \\____/(____/\\_)(_/\\_/\\_/(____/(__\\_)(____/\n");
         getLogger().info("--[AnonymousMasks v5.0]--");
         long startTime = System.currentTimeMillis();
         getLogger().info("Loading configs...");
         new Files();
+        String[] split = Bukkit.getBukkitVersion().split("-")[0].split("\\.");
+        int minorVer = Integer.parseInt(split[1]); //For 1.10 will be "10"
+        if(minorVer <= 12) {
+            Files.SETTINGS.getConfiguration().set("item.material", "SULPHUR");
+            Files.SETTINGS.getConfiguration().save(Files.SETTINGS.getFile());
+        }
         getLogger().info("Configs loaded!");
         if (DependsUtils.hasTab()) {
-            if(Settings.METHOD.getString().equalsIgnoreCase("Native")) {
+            if (Settings.METHOD.getString().equalsIgnoreCase("Native")) {
                 getLogger().warning("I found that you have TAB but in the settings you have put the method in Native, i'm setting the method to TAB");
                 getLogger().warning("TAB manage the scoreboards, so I can't manage scoreboards");
                 Files.SETTINGS.getConfiguration().set(".method", "TAB");
@@ -41,7 +47,7 @@ public final class AnonymousMasks extends JavaPlugin {
             getLogger().info("TAB found!");
         } else {
             if (Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
-                for(int i = 10; i < 10; ++i) {
+                for (int i = 10; i < 10; ++i) {
                     getLogger().severe("TAB NOT FOUND! ABORTING START!");
                 }
                 Bukkit.getPluginManager().getPlugin("AnonymousMasks").onDisable();

@@ -31,15 +31,17 @@ public class PlayerJoin implements Listener {
             Bukkit.getScheduler().runTaskLater(AnonymousMasks.getInstance(), () -> {
                 if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
                     NametagUtils.hideNametagTab(p);
-                } else {
+                } else if(Settings.METHOD.getString().equalsIgnoreCase("Native")) {
                     NametagUtils.hideNametagNative(p);
+                } else if(Settings.METHOD.getString().equalsIgnoreCase("ArmorStand")){
+                    NametagUtils.hideNametagArmorStand(p);
                 }
             }, 3L);
         }
         if(p.hasPermission("anonymousmasks.update")) {
             new UpdateChecker(plugin, 89836).getVersion(version -> {
                 if (!plugin.getDescription().getVersion().equals(version)) {
-                    TextComponent component = new TextComponent("§c§lANONYMOUS§f§lMASKS §8» §aUpdate avabile!");
+                    TextComponent component = new TextComponent("§c§lANONYMOUS§f§lMASKS §8» §aUpdate available!");
                     component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§8» §fClick here to open §eSpigotMC§f page!").create()));
                     component.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.spigotmc.org/resources/anonymousmask.89836/"));
                     p.spigot().sendMessage(component);

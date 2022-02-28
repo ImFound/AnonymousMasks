@@ -17,8 +17,10 @@ public class InventoryClick implements Listener {
         if (e.getCurrentItem() != null && MaskUtils.isMask(e.getCurrentItem()) && e.getSlotType() == InventoryType.SlotType.ARMOR) {
             if(Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
                 NametagUtils.showNametagTab(p);
-            } else {
+            } else if(Settings.METHOD.getString().equalsIgnoreCase("Native")) {
                 NametagUtils.showNametagNative(p);
+            } else if(Settings.METHOD.getString().equalsIgnoreCase("ArmorStand")){
+                NametagUtils.showNametagArmorStand(p);
             }
         }
     }

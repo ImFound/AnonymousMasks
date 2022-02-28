@@ -4,15 +4,19 @@ import dev.imfound.anonymousmasks.config.enums.Settings;
 import dev.imfound.anonymousmasks.config.enums.Lang;
 import dev.imfound.anonymousmasks.utils.MaskUtils;
 import dev.imfound.anonymousmasks.utils.NametagUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteract implements Listener {
+
 
 
     @EventHandler
@@ -30,8 +34,10 @@ public class PlayerInteract implements Listener {
                 p.getInventory().getItemInMainHand().setAmount(p.getInventory().getItemInMainHand().getAmount() - 1);
                 if (Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
                     NametagUtils.hideNametagTab(p);
-                } else {
+                } else if(Settings.METHOD.getString().equalsIgnoreCase("Native")) {
                     NametagUtils.hideNametagNative(p);
+                } else if(Settings.METHOD.getString().equalsIgnoreCase("ArmorStand")){
+                    NametagUtils.hideNametagArmorStand(p);
                 }
             }
         }
