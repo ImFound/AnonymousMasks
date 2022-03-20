@@ -38,8 +38,17 @@ public final class AnonymousMasks extends JavaPlugin {
         }
         getLogger().info("Configs loaded!");
         if (DependsUtils.hasTab()) {
-            if (Settings.METHOD.getString().equalsIgnoreCase("Native")) {
-                getLogger().warning("I found that you have TAB but in the settings you have put the method in Native, i'm setting the method to TAB");
+            try{
+                Class.forName("me.neznamy.tab.api.TabAPI");
+            }catch (ClassNotFoundException e) {
+                for(int i = 0; i<10; i++) {
+                    getLogger().severe("Hey! You are using an old version of TAB, wich isn't supported! Download TAB 3.0+ from https://github.com/NEZNAMY/TAB/releases/");
+                }
+                Bukkit.getPluginManager().disablePlugin(this);
+                return;
+            }
+            if (Settings.METHOD.getString().equalsIgnoreCase("Native") || Settings.METHOD.getString().equalsIgnoreCase("ArmorStand")  && TabAPI.getInstance().getTeamManager() != null) {
+                getLogger().warning("I found that you have TAB but in the settings you have put the method in Native/ArmorStand, i'm setting the method to TAB");
                 getLogger().warning("TAB manage the scoreboards, so I can't manage scoreboards");
                 Files.SETTINGS.getConfiguration().set(".method", "TAB");
                 Files.SETTINGS.getConfiguration().save(Files.SETTINGS.getFile());
@@ -47,10 +56,10 @@ public final class AnonymousMasks extends JavaPlugin {
             getLogger().info("TAB found!");
         } else {
             if (Settings.METHOD.getString().equalsIgnoreCase("TAB")) {
-                for (int i = 10; i < 10; ++i) {
+                for (int i = 0; i < 10; ++i) {
                     getLogger().severe("TAB NOT FOUND! ABORTING START!");
                 }
-                Bukkit.getPluginManager().getPlugin("AnonymousMasks").onDisable();
+                Bukkit.getPluginManager().disablePlugin(this);
                 return;
             }
         }

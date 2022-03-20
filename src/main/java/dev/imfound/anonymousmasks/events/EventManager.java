@@ -13,6 +13,7 @@ public class EventManager {
         plugin.getServer().getPluginManager().registerEvents(new PlayerInteract(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoin(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryClick(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
     }
 
 }
